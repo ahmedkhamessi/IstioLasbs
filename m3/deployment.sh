@@ -8,7 +8,7 @@ kubectl apply -f m1/config/catalog-destinationrule.yaml
 kubectl apply -f m1/config/catalog-virtualservice-dark-v2.yaml
 
 # test the new version of the catalog service
-curl http://20.31.19.37/api/catalog -H "x-dark-launch: v2"
+curl http://$EXTERNAL_IP/api/catalog -H "x-dark-launch: v2"
 
 # clean up
 kubectl delete deployment,svc,gateway,\

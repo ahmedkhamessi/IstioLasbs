@@ -43,4 +43,4 @@ sh -c 'while true; do curl -s http://webapp.istioinaction/api/catalog/items/1; s
 # Expose Jaeger
 ./m1/expose-opentracing.sh
 # generate traffic to the web service internally
-while true; do curl http://20.31.19.37/api/catalog; sleep .5; done
+while true; do curl http://$EXTERNAL_IP/api/catalog; sleep .5; done
