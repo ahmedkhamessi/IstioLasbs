@@ -1,7 +1,7 @@
 # Set variables for the new AKS cluster
-resourceGroup=rg-istio-action
+resourceGroup=rg-istiolab
 location=westeurope
-aksName=aks-istio
+aksName=aks-istiolab
 
 # Create AKS cluster
 az aks create \
