@@ -1,8 +1,11 @@
-# Deploy the catalog service
-istioctl kube-inject -f services/catalog/kubernetes/catalog.yaml
+# enrich the catalog service with sidecar (for example sake)
+istioctl kube-inject -f application/catalog/kubernetes/catalog.yaml
 
 # enable automatic sidecar injection
 kubectl label namespace istioinaction istio-injection=enabled
+
+# deploy the catalog service
+kubectl apply -f application/catalog/kubernetes/catalog.yaml
 
 # Test the catalog service internally
  kubectl run -i -n default --rm --restart=Never dummy \
@@ -10,7 +13,7 @@ kubectl label namespace istioinaction istio-injection=enabled
 sh -c 'curl -s http://catalog.istioinaction/items/1'
 
 # Deploy the web service
-kubectl apply -f services/webapp/kubernetes/webapp.yaml
+kubectl apply -f application/webapp/kubernetes/webapp.yaml
 
 # Test the web service internally
 kubectl run -i -n default --rm --restart=Never dummy \
@@ -18,7 +21,7 @@ kubectl run -i -n default --rm --restart=Never dummy \
 sh -c 'curl -s http://webapp.istioinaction/api/catalog/items/1'
 
 # Configure the ingress gateway to expose the web service
-kubectl apply -f ch2/ingress-gateway.yaml
+kubectl apply -f config/ingress-gateway.yaml
 
 # Test the web service externally
 ## Get the external IP address of the ingress gateway

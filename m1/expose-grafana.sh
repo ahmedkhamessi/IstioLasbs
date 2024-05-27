@@ -13,7 +13,7 @@ spec:
       name: http-grafana
       protocol: HTTP
     hosts:
-    - "grafana.20.31.19.37.nip.io"
+    - "grafana.57.153.40.199.nip.io"
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
@@ -22,7 +22,7 @@ metadata:
   namespace: istio-system
 spec:
   hosts:
-  - "grafana.20.31.19.37.nip.io"
+  - "grafana.57.153.40.199.nip.io"
   gateways:
   - grafana-gateway
   http:
