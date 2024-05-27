@@ -30,5 +30,13 @@ docker run -it --rm --link proxy curlimages/curl \
 # Change the configuration to add a retry policy
 docker rm -f proxy
 
- docker run --name proxy --link httpbin envoyproxy/envoy:v1.19.0 \
+docker run --name proxy --link httpbin envoyproxy/envoy:v1.19.0 \
   --config-yaml "$(cat simple_retry.yaml)"
+
+# Force an Error on httpbin
+docker run -it --rm --link proxy curlimages/curl \
+curl -v http://proxy:15001/status/500
+
+# Check the result
+docker run -it --rm --link proxy curlimages/curl \
+curl -X GET http://proxy:15000/stats | grep retry
