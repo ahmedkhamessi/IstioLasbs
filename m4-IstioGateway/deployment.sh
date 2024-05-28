@@ -65,10 +65,10 @@ curl -v http://$URL/api/catalog \
 # create a secret for the client certificate
 kubectl create -n istio-system secret \
 generic webapp-credential-mtls --from-file=tls.key=\
-ch4/certs/3_application/private/webapp.istioinaction.io.key.pem \
+certs/3_application/private/webapp.istioinaction.io.key.pem \
 --from-file=tls.crt=\
-ch4/certs/3_application/certs/webapp.istioinaction.io.cert.pem \
---from-file=ca.crt=ch4/certs/2_intermediate/certs/ca-chain.cert.pem
+certs/3_application/certs/webapp.istioinaction.io.cert.pem \
+--from-file=ca.crt=certs/2_intermediate/certs/ca-chain.cert.pem
 
 # configure the gateway for mutual TLS
 kubectl apply -f coolstore-gw-mtls.yaml
@@ -87,8 +87,8 @@ kubectl delete po -n istio-system -l app=istio-ingressgateway
 # Test the ingress gateway with mutual TLS
 curl -H "Host: webapp.istioinaction.io" \
 https://webapp.istioinaction.io:443/api/catalog \
---cacert ch4/certs/2_intermediate/certs/ca-chain.cert.pem \
+--cacert certs/2_intermediate/certs/ca-chain.cert.pem \
 --resolve webapp.istioinaction.io:443:$URL \
---cert ch4/certs/4_client/certs/webapp.istioinaction.io.cert.pem \
---key ch4/certs/4_client/private/webapp.istioinaction.io.key.pem
+--cert certs/4_client/certs/webapp.istioinaction.io.cert.pem \
+--key certs/4_client/private/webapp.istioinaction.io.key.pem
 
