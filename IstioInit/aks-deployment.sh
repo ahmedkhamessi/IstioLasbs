@@ -1,7 +1,7 @@
 # Set variables for the new AKS cluster
-resourceGroup=rg-istiolab
+resourceGroup=rg-biotronik
 location=westeurope
-aksName=aks-istiolab
+aksName=aks-biotronik
 
 # Create AKS cluster
 az aks create \
